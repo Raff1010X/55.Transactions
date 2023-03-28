@@ -11,3 +11,9 @@ Nasz system musi być na to gotowy!
 ## Zadanie:
 Napisz algorytm, który przetworzy wszystkie transakcji i zwróci posortowaną listę rachunków, wraz z ilością uznań i obciążeń oraz saldo końcowe.
 Zakłada się, że saldo początkowe każdego rachunku to 0zł.
+
+## Przykładowy request/response:
+W folderze: './example'
+
+## Algorytm
+W pliku: './models/transaction.js'
