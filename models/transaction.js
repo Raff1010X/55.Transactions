@@ -1,49 +1,19 @@
 exports.report = (data) => {
-    data = [
-        {
-            debitAccount: '32309111922661937852684864',
-            creditAccount: '06105023389842834748547303',
-            amount: 10.9,
-        },
-        {
-            debitAccount: '31074318698137062235845814',
-            creditAccount: '66105036543749403346524547',
-            amount: 200.9,
-        },
-        {
-            debitAccount: '66105036543749403346524547',
-            creditAccount: '32309111922661937852684864',
-            amount: 50.1,
-        },
-    ];
+    let map = [];
+    data.forEach((el) => map.push(el.debitAccount, el.creditAccount));
+    map = Array.from(new Set(map)).sort();
 
-    let accounts = prepareInitialAccounts(data);
-    let response = calculateAccounts(data, accounts)
-
-    return { response };
-};
-
-function prepareInitialAccounts(data) {
-    let accounts = []
-
-    data.forEach((el) => {
-        accounts.push(el.debitAccount);
-        accounts.push(el.creditAccount);
+    let accounts = map.map((el) => {
+        return { account: el, debitCount: 0, creditCount: 0, balance: 0 };
     });
 
-    accounts = Array.from(new Set(accounts))
-        .sort()
-        .map((el) => {
-            return { account: el, debitCount: 0, creditCount: 0, balance: 0 };
-        });
-
-    return accounts;
-}
-
-function calculateAccounts(data, accounts) {
-
     data.forEach((el) => {
-        console.log(el)
+        const debitIndex = map.indexOf(el.debitAccount);
+        const creditIndex = map.indexOf(el.creditAccount);
+        accounts[debitIndex].debitCount += 1;
+        accounts[creditIndex].creditCount += 1;
+        accounts[debitIndex].balance -= el.amount;
+        accounts[creditIndex].balance += el.amount;
     });
 
     return accounts;
