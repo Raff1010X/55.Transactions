@@ -15,9 +15,6 @@ app.get('/', (req, res) => {
 
 app.use('/transactions', require('./routes/transaction'));
 
-//** Send response middleware
-// app.use(require('./utils/sendResponse'));
-
 //** Route not found middleware
 // app.all('*', require('./routes/notFound'));
 
