@@ -4,7 +4,7 @@ const expected = require('../example/example_response.json')
 
 describe('report', () => {
 
-  it('should return correct account information', () => {
+  it('should return correct data', () => {
     const result = report(data);
     expect(result).toEqual(expected);
   });
