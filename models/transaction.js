@@ -12,9 +12,13 @@ exports.report = (data) => {
         const creditIndex = map.indexOf(el.creditAccount);
         accounts[debitIndex].debitCount += 1;
         accounts[creditIndex].creditCount += 1;
-        accounts[debitIndex].balance -= el.amount;
-        accounts[creditIndex].balance += el.amount;
+        accounts[debitIndex].balance =
+            Math.round(accounts[debitIndex].balance * 100 - el.amount * 100) /
+            100;
+        accounts[creditIndex].balance =
+            Math.round(accounts[creditIndex].balance * 100 + el.amount * 100) /
+            100;
     });
 
     return accounts;
-}
+};
